@@ -24,6 +24,7 @@ RUN git clone https://github.com/mosuka/example.git
 WORKDIR /opt/example
 RUN npm install
 
-EXPORT 3000
+EXPOSE 3000
+USER EXAMPLE_USER
 
 CMD [ "npm", "start"]
