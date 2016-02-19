@@ -20,11 +20,11 @@ RUN useradd -r -u $EXAMPLE_UID -g $EXAMPLE_GROUP $EXAMPLE_USER
 # Build application
 RUN mkdir /opt/example
 WORKDIR /opt
-RUN git clone https://github.com/mosuka/example.git
+RUN git clone https://github.com/zlabjp/example.git
 WORKDIR /opt/example
 RUN npm install
 
 EXPOSE 3000
-USER EXAMPLE_USER
+USER $EXAMPLE_USER
 
 CMD [ "npm", "start"]
