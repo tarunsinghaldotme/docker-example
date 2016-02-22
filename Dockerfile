@@ -1,6 +1,6 @@
 FROM ubuntu:vivid
 
-MAINTAINER Minoru Osuka "mosuka@zlab.co.jp"
+MAINTAINER Z Lab Corporation "opensource@zlab.co.jp"
 
 RUN apt-get update \
  && apt-get -y install nodejs npm git \
