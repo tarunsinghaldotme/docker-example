@@ -20,11 +20,12 @@ RUN useradd -r -u $EXAMPLE_UID -g $EXAMPLE_GROUP $EXAMPLE_USER
 # Build application
 RUN mkdir /opt/example
 WORKDIR /opt
-RUN git clone https://github.com/zlabjp/example.git
+RUN git clone -b 0.1.0 https://github.com/zlabjp/example.git
 WORKDIR /opt/example
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 4000
 USER $EXAMPLE_USER
 
+ENV PORT=4000
 CMD [ "npm", "start"]
