@@ -1,0 +1,15 @@
+publish:
+  docker:
+    # registry: quay.corp.zlab.co.jp
+    registry: quay.corp.zlab.co.jp
+    username: $$DOCKER_USERNAME
+    password: $$DOCKER_PASSWORD
+    email: $$DOCKER_EMAIL
+    #repo: zlab/docker-cfssl
+    repo: kinadu/docker-example
+    tag: latest
+    insecure: true
+    storage_driver: overlay
+    when:
+      branch: master
+
