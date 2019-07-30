@@ -1,31 +1,20 @@
-FROM ubuntu:vivid
+# Use an official Python runtime as a parent image
+FROM python:2.7-slim
 
-MAINTAINER Z Lab Corporation "opensource@zlab.co.jp"
+# Set the working directory to /app
+WORKDIR /app
 
-RUN apt-get update \
- && apt-get -y install nodejs npm git \
- && apt-get clean
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-RUN update-alternatives --install /usr/bin/node node /usr/bin/nodejs 10
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Add group
-ENV EXAMPLE_GROUP example
-RUN groupadd -r $EXAMPLE_GROUP
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
-# Add user
-ENV EXAMPLE_USER example
-ENV EXAMPLE_UID 3000
-RUN useradd -r -u $EXAMPLE_UID -g $EXAMPLE_GROUP $EXAMPLE_USER
+# Define environment variable
+ENV NAME World
 
-# Build application
-RUN mkdir /opt/example
-WORKDIR /opt
-RUN git clone -b 0.1.0 https://github.com/zlabjp/example.git
-WORKDIR /opt/example
-RUN npm install
-
-EXPOSE 4000
-USER $EXAMPLE_USER
-
-ENV PORT=4000
-CMD [ "npm", "start"]
+# Run app.py when the container launches
+CMD ["python", "app.py"]
